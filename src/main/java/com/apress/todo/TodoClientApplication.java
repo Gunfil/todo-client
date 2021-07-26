@@ -38,8 +38,16 @@ public class TodoClientApplication {
 			assert completed.isCompleted();
 			log.info(completed.toString());
 
-			client.delete(newToDo.getId());
-			assert client.findById(newToDo.getId()) == null;
+			newToDo = client.upsert(new ToDo("Операция 1"));
+			assert newToDo != null;
+			log.info(newToDo.toString());
+
+			newToDo = client.upsert(new ToDo("Операция 2"));
+			assert newToDo != null;
+			log.info(newToDo.toString());
+
+			/*client.delete(newToDo.getId());
+			assert client.findById(newToDo.getId()) == null;*/
 		};
 	}
 }
